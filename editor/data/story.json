@@ -1,0 +1,253 @@
+[
+ {
+  "title": "The Secret of Atlantis",
+  "steps": [
+   {
+    "name": "For the Glory of Portugal",
+    "goal": "Reach fame 5",
+    "reward": 500,
+    "text": "Well sailed, João! Word of your exploits reaches Duke Leon's court. Your voyage for Portugal's glory has begun."
+   },
+   {
+    "name": "Proving Your Worth",
+    "goal": "Make 3 discoveries",
+    "reward": 1000,
+    "text": "Your discoveries are the talk of Lisbon. The Duke watches your progress with growing pride."
+   },
+   {
+    "name": "Royal Favor",
+    "goal": "Reach fame 15",
+    "reward": 2000,
+    "text": "The crown grants you an audience. \"Continue, João — perhaps the legend of Atlantis is more than myth.\""
+   },
+   {
+    "name": "The Atlantis Legend",
+    "goal": "Make 8 discoveries",
+    "reward": 3000,
+    "text": "Fragments of an ancient map hint at a sunken continent. The secret of Atlantis feels within reach."
+   },
+   {
+    "name": "The Lost Continent",
+    "goal": "Make 15 discoveries",
+    "reward": 10000,
+    "text": "At last — the lost land of Atlantis rises from legend! Your name will echo through the ages, son of Duke Leon Franco."
+   }
+  ]
+ },
+ {
+  "title": "Vengeance",
+  "steps": [
+   {
+    "name": "The Red-Haired Pirate",
+    "goal": "Reach fame 5",
+    "reward": 500,
+    "text": "Your name is whispered in every tavern. The trail of your brother and your beloved grows warmer."
+   },
+   {
+    "name": "Hunting the Trail",
+    "goal": "Sink 3 ships",
+    "reward": 1000,
+    "text": "Each sunken ship brings you closer to the ones responsible. Portugal will answer for their loss."
+   },
+   {
+    "name": "Growing Notoriety",
+    "goal": "Reach fame 15",
+    "reward": 2000,
+    "text": "The red-haired pirate is feared across the seas. Your enemies know you are coming."
+   },
+   {
+    "name": "The Betrayer's Trail",
+    "goal": "Sink 8 ships",
+    "reward": 3000,
+    "text": "The web of betrayal unravels. You can almost see the faces of those who took everything from you."
+   },
+   {
+    "name": "Vengeance at Last",
+    "goal": "Sink 15 ships",
+    "reward": 10000,
+    "text": "It is done. The sea has claimed your vengeance. May your brother and your beloved finally rest in peace."
+   }
+  ]
+ },
+ {
+  "title": "The King's Privateer",
+  "steps": [
+   {
+    "name": "Secret Orders",
+    "goal": "Reach fame 5 (Squire)",
+    "reward": 500,
+    "text": "King Henry's seal glints in your hand. Sail as a privateer, Sir Otto — and keep your mission secret."
+   },
+   {
+    "name": "Proving Loyalty",
+    "goal": "Reach fame 10 (Knight)",
+    "reward": 1000,
+    "text": "Your deeds reach London. The King is pleased with his secret knight."
+   },
+   {
+    "name": "Rising Star",
+    "goal": "Reach fame 20 (Viscount)",
+    "reward": 2000,
+    "text": "Spain's admirals curse your name. The Spanish Fleet weakens under your privateering."
+   },
+   {
+    "name": "The King's Trust",
+    "goal": "Reach fame 30 (Earl)",
+    "reward": 3000,
+    "text": "The King himself commends you. England's dominance of the seas is nearly assured."
+   },
+   {
+    "name": "Hero of England",
+    "goal": "Reach fame 50 (Duke)",
+    "reward": 10000,
+    "text": "The Spanish Fleet is broken! King Henry VIII names you a hero of England. Your secret mission is complete."
+   }
+  ]
+ },
+ {
+  "title": "Map of the World",
+  "steps": [
+   {
+    "name": "Mercator's Request",
+    "goal": "Discover 3 ports",
+    "reward": 500,
+    "text": "Your old friend Mercator writes: \"Plot the world for me, Ernst. Every coast, every port.\""
+   },
+   {
+    "name": "Charting the Coast",
+    "goal": "Discover 8 ports",
+    "reward": 1000,
+    "text": "Your charts grow detailed. Sailors everywhere will soon navigate by your maps."
+   },
+   {
+    "name": "Unknown Lands",
+    "goal": "Make 3 discoveries",
+    "reward": 2000,
+    "text": "Beyond the known coasts lie wonders no map has ever shown. You ink them in, one by one."
+   },
+   {
+    "name": "The Far Reaches",
+    "goal": "Discover 15 ports",
+    "reward": 3000,
+    "text": "From Lisbon to the farthest shore, your map spans the known world. Mercator will be astonished."
+   },
+   {
+    "name": "The Complete Map",
+    "goal": "Discover 25 ports",
+    "reward": 10000,
+    "text": "It is finished — a detailed map of the entire world! Your name joins Mercator's among the great geographers."
+   }
+  ]
+ },
+ {
+  "title": "The Conti Debt",
+  "steps": [
+   {
+    "name": "A Family's Burden",
+    "goal": "Amass 10,000 gold",
+    "reward": 500,
+    "text": "The Conti debt hangs over you, but every coin earned is a step toward freedom."
+   },
+   {
+    "name": "First Treasures",
+    "goal": "Dig up 2 treasures",
+    "reward": 1000,
+    "text": "Glittering treasure! The rumors were true — the world is full of riches for those who seek them."
+   },
+   {
+    "name": "Exotic Riches",
+    "goal": "Amass 40,000 gold",
+    "reward": 2000,
+    "text": "Your coffers swell. The moneylenders of Genoa grow nervous — the Conti name is rising again."
+   },
+   {
+    "name": "The Great Haul",
+    "goal": "Dig up 4 treasures",
+    "reward": 3000,
+    "text": "Another vault of treasure! Your exploits as a treasure hunter are legendary."
+   },
+   {
+    "name": "Debt Repaid",
+    "goal": "Amass 100,000 gold",
+    "reward": 10000,
+    "text": "The last coin is paid. The Conti family debt is erased — and you are richer than ever. The world is yours!"
+   }
+  ]
+ },
+ {
+  "title": "The Merchant of Istanbul",
+  "steps": [
+   {
+    "name": "A Merchant's Dream",
+    "goal": "Amass 5,000 gold",
+    "reward": 500,
+    "text": "From the bazaars of Istanbul to distant shores, your trading journey begins. Fortune favors the bold."
+   },
+   {
+    "name": "Establishing Routes",
+    "goal": "Discover 5 ports",
+    "reward": 1000,
+    "text": "New ports, new markets, new profits. Your trade network begins to span the seas."
+   },
+   {
+    "name": "Building Wealth",
+    "goal": "Amass 25,000 gold",
+    "reward": 2000,
+    "text": "Your ships return heavy with goods and gold. Merchants from Venice to Alexandria know your name."
+   },
+   {
+    "name": "Master of Trade",
+    "goal": "Discover 12 ports",
+    "reward": 3000,
+    "text": "Your trade routes circle the globe. No market is beyond your reach."
+   },
+   {
+    "name": "Trade Magnate",
+    "goal": "Amass 100,000 gold",
+    "reward": 10000,
+    "text": "You are a magnate of trade, wealthier than sultans! The boy who struggled in Istanbul now rules the markets of the world."
+   }
+  ]
+ },
+ {
+  "title": "The Fantasy Journey of Isabella",
+  "steps": [
+   {
+    "name": "The Duke's Commission",
+    "goal": "Reach fame 3",
+    "reward": 1000,
+    "text": "In Lisbon, Duke Leon entrusts you with a commission and a generous sum. Your quiet days translating ancient texts in Sintra are over — the sea calls, Isabella."
+   },
+   {
+    "name": "The Athens Library",
+    "goal": "Discover Athens",
+    "reward": 1500,
+    "text": "In the great library of Athens you decipher the way to awaken the red stone: gather spiritual power from the four most legendary sites on Earth — the Pyramids, Stonehenge, Bermuda, and Yingzhou."
+   },
+   {
+    "name": "The Four Sacred Sites",
+    "goal": "Make 4 discoveries",
+    "reward": 2500,
+    "text": "Spiritual power hums within the red stone. But the Spanish fleet shadows you — they too covet Yubel's magic. Stay sharp, Isabella."
+   },
+   {
+    "name": "The Spanish Intercept",
+    "goal": "Sink 3 ships",
+    "reward": 3000,
+    "text": "The Spanish fleet moves to seize you! At the brink, Yubel's magic flares — and in a flash of light the four of you are hurled into another world…"
+   },
+   {
+    "name": "The Way Home",
+    "goal": "Make 8 discoveries",
+    "reward": 4000,
+    "text": "Stranded in a strange world, you and your companions search for the way back. Every discovery brings you closer to home."
+   },
+   {
+    "name": "Sending Yudora Home",
+    "goal": "Reach fame 20",
+    "reward": 10000,
+    "text": "With the spiritual power gathered, you open the way home and see Yudora safely back to her own world. Your fantastical journey becomes legend, Isabella!"
+   }
+  ]
+ }
+]

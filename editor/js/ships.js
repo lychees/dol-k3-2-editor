@@ -1,6 +1,6 @@
 // ships.js — 船舰编辑器 (ships.json)
 // Schema: { "Ship Name": { durability, power, capacity, guns, min_crew, max_crew, price, tacking } }
-import { loadJSON, saveFile, toJSONBlob, pickFile, el, pageHeader, makeDirty, toast } from './common.js';
+import { loadJSON, saveFile, toJSONBlob, pickFile, el, pageHeader, makeDirty, toast, assetURL, probeAssets } from './common.js';
 
 pageHeader('船舰编辑器', 'ships.json — 22 种船型属性');
 
@@ -16,6 +16,7 @@ const FIELDS = [
 ];
 
 const dirty = makeDirty();
+await probeAssets();
 let ships = await loadJSON('ships.json');
 let selected = null;
 
@@ -41,6 +42,7 @@ function renderForm() {
   editorEl.style.display = ''; emptyEl.style.display = 'none';
   formEl.innerHTML = '';
   const s = ships[selected];
+  updateShipImage();
 
   formEl.append(el('label', { text: '船名' }));
   const nameInput = el('input', { type: 'text', value: selected });
@@ -51,7 +53,7 @@ function renderForm() {
     ships[nn] = ships[selected];
     delete ships[selected];
     selected = nn;
-    dirty.mark(); renderList();
+    dirty.mark(); renderList(); updateShipImage();
   };
   formEl.append(nameInput);
 
@@ -67,6 +69,17 @@ function renderForm() {
     formEl.append(inp);
   }
   validate(s);
+}
+
+// 船只图片：assets/ships/<船名小写>.png（与游戏内 shipyard 一致的命名规则）
+function updateShipImage() {
+  const img = document.getElementById('ship-img');
+  const label = document.getElementById('ship-img-name');
+  if (!selected) { img.removeAttribute('src'); label.textContent = ''; return; }
+  const file = 'ships/' + selected.toLowerCase() + '.png';
+  img.src = assetURL(encodeURI(file));
+  img.onerror = () => { img.removeAttribute('src'); label.textContent = '(无图片 ' + file + ')'; };
+  img.onload = () => { label.textContent = file; };
 }
 
 function validate(s) {

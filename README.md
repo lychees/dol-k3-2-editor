@@ -15,12 +15,19 @@ merge them back into the game repo's `game/assets/` to apply.
 - **World map editor** (`editor/map.html`) — paint the 2160×1080
   `world_map.bin` (wrap-aware brush/rect/fill/eyedropper, undo/redo,
   port & discovery overlays, .bin import/export)
+- **Random map viewer** (`editor/rando.html`) — preview the randomizer's
+  generated world for any seed (identical to in-game generation), with
+  port/discovery relocation preview and PNG export
 - **Port map editor** (`editor/portmap.html`) — the 101 96×96 port scenes in
   `portmaps.bin`, with the correct per-port PORTCHIP tileset and a building
   overlay
-- **Ship editor** (`editor/ships.html`) — all 22 ship types in `ships.json`
+- **Ship editor** (`editor/ships.html`) — all 22 ship types in `ships.json`,
+  with ship image preview
 - **Character editor** (`editor/mates.html`) — 50 mates + 28 barmaids, with a
   portrait picker over `figures.png`
+- **Story editor** (`editor/story.html`) — the 7 protagonists' main
+  storylines (`story.json`: chapter name/goal/reward/text), with an
+  in-game-style dialog preview
 - **Economy editor** (`editor/goods.html`) — 13 regions × 46 goods price
   matrix and per-port specialties in `goods.json`
 - **Port editor** (`editor/ports.html`) — drag ports on the world map; edit

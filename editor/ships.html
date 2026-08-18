@@ -21,8 +21,14 @@
   </div>
   <div style="flex:1;padding:16px;overflow:auto">
     <div id="empty" class="hint">← 选择左侧船型进行编辑</div>
-    <div id="editor" style="display:none;max-width:560px">
-      <div class="ed-form" id="form"></div>
+    <div id="editor" style="display:none;max-width:720px">
+      <div style="display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap">
+        <div class="ed-form" id="form"></div>
+        <div style="text-align:center">
+          <img id="ship-img" alt="" style="width:256px;height:192px;image-rendering:pixelated;border:1px solid #35455c;background:#0b0f16">
+          <div class="hint" id="ship-img-name"></div>
+        </div>
+      </div>
       <p class="hint" id="ship-tip"></p>
     </div>
   </div>

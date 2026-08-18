@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>随机地图查看器 — UW</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/editor.css">
+</head>
+<body>
+<div class="ed-toolbar">
+  <label>种子
+    <input type="text" id="seed" value="uw2" style="width:140px">
+  </label>
+  <button id="btn-randseed">随机种子</button>
+  <button id="btn-gen" class="active">生成</button>
+  <button id="zoom-out">−</button>
+  <span id="zoom-label" style="min-width:72px;text-align:center">1 px/tile</span>
+  <button id="zoom-in">＋</button>
+  <span class="spacer"></span>
+  <button id="btn-export">导出 PNG</button>
+</div>
+<div class="ed-main">
+  <div class="ed-side">
+    <div class="ed-form">
+      <label for="opt-landpct">陆地占比</label>
+      <div>
+        <input type="range" id="opt-landpct" min="0.12" max="0.32" step="0.01" value="0.18"
+          style="width:150px;vertical-align:middle">
+        <b id="landpct-label">18%</b>
+      </div>
+      <label for="opt-cont">大陆尺度</label>
+      <select id="opt-cont">
+        <option value="large" selected>large（大陆）</option>
+        <option value="medium">medium</option>
+        <option value="small">small（群岛）</option>
+      </select>
+      <label for="opt-rivers">河流数量</label>
+      <input type="number" id="opt-rivers" min="0" max="100" value="16">
+      <label for="opt-mount">山脉数量</label>
+      <input type="number" id="opt-mount" min="0" max="100" value="22">
+      <label>地形选项</label>
+      <div>
+        <label><input type="checkbox" id="opt-polar" checked> 极地景观</label>
+        <label><input type="checkbox" id="opt-coast" checked> 平滑海岸</label>
+      </div>
+    </div>
+    <hr style="border-color:#263143">
+    <div>
+      <label><input type="checkbox" id="ov-reloc" checked> 港口/发现物重定位</label><br>
+      <label><input type="checkbox" id="ov-orig"> 对比原始港口（灰点）</label>
+    </div>
+    <hr style="border-color:#263143">
+    <div id="stats" style="font-size:13px;line-height:1.7">尚未生成</div>
+    <p class="hint">
+      中键/右键拖动平移；滚轮以鼠标为中心缩放。<br>
+      红点=重定位港口，绿点=重定位发现物，灰点=原始港口位置。<br>
+      生成参数与游戏内 randomizer 面板一致（main.js），同种子同选项得到同一世界。
+    </p>
+  </div>
+  <div class="ed-canvas-wrap" id="wrap">
+    <canvas class="ed-canvas" id="view"></canvas>
+    <div id="status" style="position:absolute;left:0;right:0;bottom:0;padding:4px 10px;
+      background:#141b27;border-top:1px solid #263143;font-size:12px;color:#9db0c7">加载中…</div>
+  </div>
+</div>
+<script type="module" src="js/rando.js"></script>
+</body>
+</html>

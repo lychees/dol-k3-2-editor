@@ -55,6 +55,14 @@
 - x/y 为世界地图 tile 坐标；`img` 为 discoveries.png 中 1-based [列, 行]（49px 格，16 列 × 8 行，无前边距）。
 - `subject` 为学科分类（biology / archaeology 等）。
 
+## story.json — 主线剧情
+- 数组，7 条剧情线（按主角索引 0–6：João / Catalina / Otto / Ernst / Pietro / Ali / Isabella）：
+  `[{ title, steps: [{ name, goal, reward, text }] }]`
+- 游戏启动时按索引覆盖 main.js 内置 STORYLINES 的展示字段（name/goal/reward/text）；
+  完成条件 check() 与进度 progress() 是代码逻辑，不可数据化。
+- 结构固定：步骤数量需与内置一致（多余项被忽略，缺失项保留内置文案）。
+- 编辑器内置副本 `editor/data/story.json` 供线上独立部署时回退。
+
 ## towns.json — 内陆城镇
 - 数组：`[{ id, name, x, z }]`（z 即世界地图 y 坐标）。
 

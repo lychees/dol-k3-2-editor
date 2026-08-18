@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>剧情编辑器 — UW</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/editor.css">
+<style>
+  .tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+  .tabs button { border-radius: 4px 4px 0 0; }
+  .step-card {
+    background: #18202e; border: 1px solid #2a3648; border-radius: 8px;
+    padding: 12px 14px; margin-bottom: 12px; cursor: pointer;
+  }
+  .step-card:hover { border-color: #3a5070; }
+  .step-card.selected { border-color: #4f8fd0; background: #1c2739; }
+  .step-card .step-head { color: #9fc6ff; font-size: 13px; margin-bottom: 8px; }
+  .step-card .ed-form { grid-template-columns: 90px 1fr; }
+  .step-card input[type="text"] { width: 100%; }
+  .step-card textarea {
+    background: #1f2a3b; color: #d7dee9; border: 1px solid #35455c;
+    border-radius: 4px; padding: 4px 10px; font: inherit;
+    width: 100%; min-height: 72px; resize: vertical;
+  }
+  /* 剧情预览 — 模仿游戏内剧情弹窗 */
+  #preview {
+    position: sticky; top: 16px;
+    background: #0b0f16; border: 1px solid #35455c; border-radius: 12px;
+    padding: 18px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  #preview img {
+    width: 96px; height: 96px; object-fit: contain; flex: none;
+    image-rendering: pixelated; background: #10141c;
+    border: 1px solid #2a3648; border-radius: 8px;
+  }
+  #preview .pv-name { color: #ffd24a; font-size: 15px; margin-bottom: 6px; }
+  #preview .pv-goal { color: #8fa1b8; font-size: 12px; margin-bottom: 8px; }
+  #preview .pv-text { white-space: pre-wrap; }
+</style>
+</head>
+<body>
+<div class="ed-toolbar">
+  <div class="tabs" id="tabs"></div>
+  <span class="spacer"></span>
+  <button id="btn-import">导入 JSON…</button>
+  <button id="btn-export">导出 story.json</button>
+</div>
+<div class="ed-main">
+  <div style="flex:1;padding:16px;overflow:auto">
+    <div class="ed-form" style="grid-template-columns:90px 1fr;max-width:640px;margin-bottom:12px">
+      <label>剧情线标题</label>
+      <input type="text" id="line-title" style="width:100%">
+    </div>
+    <p class="hint">结构固定：不可增删剧情线和步骤。story.json 按索引覆盖游戏内置剧情，多余项会被游戏忽略、缺失项保留内置文案。</p>
+    <p class="hint">完成条件逻辑内置在游戏代码中（check/progress 不可数据化），这里只编辑展示文案。</p>
+    <div id="steps"></div>
+  </div>
+  <div class="ed-side" style="width:360px;border-right:none;border-left:1px solid #263143">
+    <p class="hint" style="margin-top:0">剧情预览（游戏内弹窗效果）：</p>
+    <div id="preview">
+      <img id="pv-img" alt="">
+      <div>
+        <div class="pv-name" id="pv-name"></div>
+        <div class="pv-goal" id="pv-goal"></div>
+        <div class="pv-text" id="pv-text"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="module" src="js/story.js"></script>
+</body>
+</html>
