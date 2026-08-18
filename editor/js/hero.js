@@ -1,6 +1,7 @@
 // hero.js — 养成编辑器 (heroes.json + monsters.json)
 // heroes.json: { attrs: [ {str,agi,con,int,per,cha} ×7 ], growth: { maxHp, maxSp, atk,
-//   defLvDiv, expPerLv, weaponBonus[4], armorBonus[4], mateSkill } }
+//   defLvDiv, expPerLv, weaponBonus[4], armorBonus[4], mateSkill },
+//   monsterScalePerLv, encounter, titles, skillXp, heroShop }
 // monsters.json: [ { name, img: [列, 行], hp, atk, def, exp, gold } ]
 //   img 为 discoveries.png 1-based [列, 行]（49px 格，16 列 × 8 行）；数组下标即难度 tier。
 import {
@@ -25,8 +26,63 @@ const ATTR_LABEL = {
   int: '智力 int', per: '感知 per', cha: '魅力 cha',
 };
 const CELL = 49, COLS = 16, ROWS = 8, ZOOM = 2; // discoveries.png 图集参数
-const TABS = ['heroes', 'growth', 'monsters'];
-const TAB_FILE = { heroes: 'heroes.json', growth: 'heroes.json', monsters: 'monsters.json' };
+const TABS = ['heroes', 'growth', 'monsters', 'gameplay'];
+const TAB_FILE = { heroes: 'heroes.json', growth: 'heroes.json', monsters: 'monsters.json', gameplay: 'heroes.json' };
+
+// 「养成玩法」字段的内置默认值：旧版 heroes.json / 导入旧数据缺这些字段时补齐，保证表单不崩
+const GAMEPLAY_DEFAULTS = {
+  monsterScalePerLv: 0.25,
+  encounter: { first: 2, afterBattle: 4, min: 6, rand: 8 },
+  titles: [[50, 'Duke'], [40, 'Marquis'], [30, 'Earl'], [20, 'Viscount'], [15, 'Baron'], [10, 'Knight'], [5, 'Squire'], [0, '']],
+  skillXp: { cabinDaily: 1, battleSwordplay: 5, battleLeadership: 2 },
+  heroShop: {
+    weapons: [
+      { name: 'Cutlass', cost: 500, desc: 'A fine cutlass for your expeditions ashore.' },
+      { name: 'Rapier', cost: 2000, desc: 'An elegant rapier.' },
+      { name: 'Saber', cost: 8000, desc: 'A masterwork saber.' },
+    ],
+    armors: [
+      { name: 'Leather armor', cost: 400, desc: 'Sturdy leather armor.' },
+      { name: 'Chain mail', cost: 1500, desc: 'Rings of steel.' },
+      { name: 'Plate armor', cost: 6000, desc: "A knight's plate." },
+    ],
+    balm: { cost: 100, heal: 30, desc: 'A fragrant healing balm.' },
+    telescope: { cost: 2000, desc: 'With the telescope you can spot interesting sites from much farther away.' },
+  },
+};
+
+function mergeGameplayDefaults(d) {
+  const num = Number.isFinite;
+  if (!num(d.monsterScalePerLv)) d.monsterScalePerLv = GAMEPLAY_DEFAULTS.monsterScalePerLv;
+  if (!d.encounter || typeof d.encounter !== 'object') d.encounter = {};
+  for (const k of ['first', 'afterBattle', 'min', 'rand']) {
+    if (!num(d.encounter[k])) d.encounter[k] = GAMEPLAY_DEFAULTS.encounter[k];
+  }
+  if (!Array.isArray(d.titles)) d.titles = JSON.parse(JSON.stringify(GAMEPLAY_DEFAULTS.titles));
+  if (!d.skillXp || typeof d.skillXp !== 'object') d.skillXp = {};
+  for (const k of ['cabinDaily', 'battleSwordplay', 'battleLeadership']) {
+    if (!num(d.skillXp[k])) d.skillXp[k] = GAMEPLAY_DEFAULTS.skillXp[k];
+  }
+  if (!d.heroShop || typeof d.heroShop !== 'object') d.heroShop = {};
+  const shop = d.heroShop, defShop = GAMEPLAY_DEFAULTS.heroShop;
+  for (const k of ['weapons', 'armors']) {
+    if (!Array.isArray(shop[k])) shop[k] = [];
+    for (let i = 0; i < 3; i++) {
+      if (!shop[k][i] || typeof shop[k][i] !== 'object') shop[k][i] = {};
+      const it = shop[k][i], def = defShop[k][i];
+      if (typeof it.name !== 'string') it.name = def.name;
+      if (!num(it.cost)) it.cost = def.cost;
+      if (typeof it.desc !== 'string') it.desc = def.desc;
+    }
+  }
+  if (!shop.balm || typeof shop.balm !== 'object') shop.balm = {};
+  if (!num(shop.balm.cost)) shop.balm.cost = defShop.balm.cost;
+  if (!num(shop.balm.heal)) shop.balm.heal = defShop.balm.heal;
+  if (typeof shop.balm.desc !== 'string') shop.balm.desc = defShop.balm.desc;
+  if (!shop.telescope || typeof shop.telescope !== 'object') shop.telescope = {};
+  if (!num(shop.telescope.cost)) shop.telescope.cost = defShop.telescope.cost;
+  if (typeof shop.telescope.desc !== 'string') shop.telescope.desc = defShop.telescope.desc;
+}
 
 const dirty = makeDirty();
 await probeAssets();
@@ -39,6 +95,7 @@ try {
   heroes = await (await fetch('./data/heroes.json')).json();
   toast('游戏站点暂无 heroes.json，已加载编辑器内置副本');
 }
+mergeGameplayDefaults(heroes);
 let monsters;
 try {
   monsters = await loadJSON('monsters.json');
@@ -209,6 +266,117 @@ function renderGrowth() {
   }
 }
 
+// --- tab 4：养成玩法 ---
+// 文本输入：修改即 dirty.mark()
+function textInput(obj, key) {
+  const inp = el('input', { type: 'text', value: obj[key] });
+  inp.onchange = () => { obj[key] = inp.value; dirty.mark(); };
+  return inp;
+}
+
+function renderGameplay() {
+  const main = document.getElementById('gameplay-main');
+  main.innerHTML = '';
+
+  // 1. 声望头衔
+  {
+    const card = el('div', { class: 'card' });
+    card.append(el('h3', { text: '声望头衔 titles' }));
+    const table = el('table', { class: 'stats' });
+    table.append(el('tr', {}, el('th', { text: '声望阈值' }), el('th', { text: '头衔名' }), el('th', { text: '' })));
+    heroes.titles.forEach((t, i) => {
+      const thr = el('input', { type: 'number', value: t[0], min: 0, style: 'width:80px;text-align:right' });
+      thr.onchange = () => {
+        t[0] = Math.max(0, Math.round(+thr.value || 0));
+        thr.value = t[0];
+        dirty.mark();
+      };
+      const nm = textInput(t, 1);
+      const del = el('button', { class: 'danger', text: '删除' });
+      del.onclick = () => { heroes.titles.splice(i, 1); dirty.mark(); renderGameplay(); };
+      table.append(el('tr', {}, el('td', {}, thr), el('td', {}, nm), el('td', {}, del)));
+    });
+    card.append(table);
+    const add = el('button', { text: '新增头衔', style: 'margin-top:8px' });
+    add.onclick = () => { heroes.titles.push([0, '']); dirty.mark(); renderGameplay(); };
+    card.append(add);
+    card.append(el('p', { class: 'hint', text: '按声望值降序；阈值为 ≥0 整数，声望达到该值即授予对应头衔（空名 = 无头衔）。' }));
+    main.append(card);
+  }
+
+  // 2. 野外遭遇与怪物缩放
+  {
+    const card = el('div', { class: 'card' });
+    card.append(el('h3', { text: '野外遭遇与怪物缩放' }));
+    const form = el('div', { class: 'ed-form', style: 'grid-template-columns:190px 90px' });
+    for (const [k, label] of [
+      ['first', '首次遭遇 first（秒）'],
+      ['afterBattle', '战后平静 afterBattle（秒）'],
+      ['min', '遭遇间隔下限 min（秒）'],
+      ['rand', '遭遇间隔随机 rand（秒）'],
+    ]) {
+      form.append(el('label', { text: label }), numInput(heroes.encounter, k, {}));
+    }
+    form.append(el('label', { text: 'monsterScalePerLv' }), numInput(heroes, 'monsterScalePerLv', { float: true, max: 10 }));
+    card.append(form);
+    card.append(el('p', { class: 'hint', text: '陆上遭遇战计时：first=首次秒数，afterBattle=战斗后平静期，之后遭遇间隔 = min + random×rand 秒。怪物 hp/atk/exp/gold 随英雄等级缩放 = 1 + (lv-1)×monsterScalePerLv。' }));
+    main.append(card);
+  }
+
+  // 3. 伙伴技能 XP
+  {
+    const card = el('div', { class: 'card' });
+    card.append(el('h3', { text: '伙伴技能 XP skillXp' }));
+    const form = el('div', { class: 'ed-form', style: 'grid-template-columns:190px 90px' });
+    for (const [k, label] of [
+      ['cabinDaily', '船舱任职每日 cabinDaily'],
+      ['battleSwordplay', '接舷战·剑术 battleSwordplay'],
+      ['battleLeadership', '接舷战·领导 battleLeadership'],
+    ]) {
+      form.append(el('label', { text: label }), numInput(heroes.skillXp, k, {}));
+    }
+    card.append(form);
+    card.append(el('p', { class: 'hint', text: '伙伴技能 XP 获取量：cabinDaily=船舱任职每日；battleSwordplay/battleLeadership=接舷战胜利。' }));
+    main.append(card);
+  }
+
+  // 4. 道具店英雄装备
+  {
+    const card = el('div', { class: 'card' });
+    card.append(el('h3', { text: '道具店英雄装备 heroShop' }));
+    const g = heroes.growth;
+    for (const [key, title, bonusArr, bonusLabel] of [
+      ['weapons', '武器（3 档）', g.weaponBonus, 'atk'],
+      ['armors', '护甲（3 档）', g.armorBonus, 'def'],
+    ]) {
+      card.append(el('p', { style: 'margin:10px 0 6px;color:#9fc6ff', text: title }));
+      for (let i = 0; i < 3; i++) {
+        const it = heroes.heroShop[key][i];
+        const form = el('div', { class: 'ed-form', style: 'grid-template-columns:60px 1fr;margin-bottom:10px' });
+        form.append(el('label', { text: `tier ${i + 1} name` }), textInput(it, 'name'));
+        form.append(el('label', { text: 'cost' }), numInput(it, 'cost', {}));
+        form.append(el('label', { text: 'desc' }), textInput(it, 'desc'));
+        form.append(el('label', { text: '加成' }),
+          el('span', { class: 'hint', text: `${bonusLabel} +${bonusArr[i + 1] || 0}（只读，在「成长参数」tab 的 weaponBonus/armorBonus 修改）` }));
+        card.append(form);
+      }
+    }
+    card.append(el('p', { style: 'margin:10px 0 6px;color:#9fc6ff', text: '药膏 balm' }));
+    const balmForm = el('div', { class: 'ed-form', style: 'grid-template-columns:60px 1fr;margin-bottom:10px' });
+    balmForm.append(el('label', { text: 'cost' }), numInput(heroes.heroShop.balm, 'cost', {}));
+    balmForm.append(el('label', { text: 'heal' }), numInput(heroes.heroShop.balm, 'heal', {}));
+    balmForm.append(el('label', { text: 'desc' }), textInput(heroes.heroShop.balm, 'desc'));
+    card.append(balmForm);
+    card.append(el('p', { style: 'margin:10px 0 6px;color:#9fc6ff', text: '望远镜 telescope' }));
+    const telForm = el('div', { class: 'ed-form', style: 'grid-template-columns:60px 1fr' });
+    telForm.append(el('label', { text: 'cost' }), numInput(heroes.heroShop.telescope, 'cost', {}));
+    telForm.append(el('label', { text: 'desc' }), textInput(heroes.heroShop.telescope, 'desc'));
+    card.append(telForm);
+    card.append(el('p', { class: 'hint', text: '武器/护甲 tier 1–3 的攻防加成来自 growth.weaponBonus/armorBonus（成长参数 tab），此处不重复编辑。' }));
+    main.append(card);
+  }
+}
+
 // --- tab 3：怪物 ---
 function renderMonList() {
   const list = document.getElementById('mon-list');
@@ -341,6 +509,7 @@ function setTab(t) {
   document.getElementById('btn-export').textContent = '导出 ' + TAB_FILE[t];
   if (t === 'heroes') { renderHeroList(); renderHeroForm(); }
   else if (t === 'growth') renderGrowth();
+  else if (t === 'gameplay') renderGameplay();
   else { renderMonList(); renderMonForm(); }
 }
 for (const k of TABS) {
@@ -372,6 +541,46 @@ function validateHeroes(d) {
   for (const k of ['defLvDiv', 'expPerLv']) if (!isNum(g[k])) return `growth.${k} 应为数值`;
   for (const k of ['weaponBonus', 'armorBonus']) {
     if (!Array.isArray(g[k]) || g[k].length !== 4 || !g[k].every(isNum)) return `growth.${k} 应为 4 个数值的数组`;
+  }
+  // 「养成玩法」字段：缺失允许（导入后用内置默认值补齐），存在则须结构正确
+  if (d.monsterScalePerLv !== undefined && !isNum(d.monsterScalePerLv)) return 'monsterScalePerLv 应为数值';
+  if (d.encounter !== undefined) {
+    if (!d.encounter || typeof d.encounter !== 'object') return 'encounter 应为对象';
+    for (const k of ['first', 'afterBattle', 'min', 'rand']) {
+      if (!isNum(d.encounter[k])) return `encounter.${k} 应为数值`;
+    }
+  }
+  if (d.titles !== undefined) {
+    if (!Array.isArray(d.titles)) return 'titles 应为数组';
+    for (const t of d.titles) {
+      if (!Array.isArray(t) || t.length !== 2 || !isNum(t[0]) || typeof t[1] !== 'string') {
+        return 'titles 每项应为 [声望阈值, 头衔名]';
+      }
+    }
+  }
+  if (d.skillXp !== undefined) {
+    if (!d.skillXp || typeof d.skillXp !== 'object') return 'skillXp 应为对象';
+    for (const k of ['cabinDaily', 'battleSwordplay', 'battleLeadership']) {
+      if (!isNum(d.skillXp[k])) return `skillXp.${k} 应为数值`;
+    }
+  }
+  if (d.heroShop !== undefined) {
+    const shop = d.heroShop;
+    if (!shop || typeof shop !== 'object') return 'heroShop 应为对象';
+    for (const k of ['weapons', 'armors']) {
+      if (!Array.isArray(shop[k]) || shop[k].length !== 3) return `heroShop.${k} 应为 3 档数组`;
+      for (const it of shop[k]) {
+        if (!it || typeof it !== 'object' || typeof it.name !== 'string' || !isNum(it.cost) || typeof it.desc !== 'string') {
+          return `heroShop.${k} 每档需含 name/cost/desc`;
+        }
+      }
+    }
+    if (!shop.balm || typeof shop.balm !== 'object' || !isNum(shop.balm.cost) || !isNum(shop.balm.heal) || typeof shop.balm.desc !== 'string') {
+      return 'heroShop.balm 需含 cost/heal/desc';
+    }
+    if (!shop.telescope || typeof shop.telescope !== 'object' || !isNum(shop.telescope.cost) || typeof shop.telescope.desc !== 'string') {
+      return 'heroShop.telescope 需含 cost/desc';
+    }
   }
   return null;
 }
@@ -411,9 +620,11 @@ document.getElementById('btn-import').onclick = async () => {
     } else {
       const err = validateHeroes(parsed);
       if (err) throw new Error(err);
+      mergeGameplayDefaults(parsed);
       heroes = parsed;
       heroIdx = Math.min(heroIdx, heroes.attrs.length - 1);
       if (tab === 'growth') renderGrowth();
+      else if (tab === 'gameplay') renderGameplay();
       else { renderHeroList(); renderHeroForm(); }
     }
     dirty.mark();

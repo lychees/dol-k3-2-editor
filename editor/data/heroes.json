@@ -17,5 +17,23 @@
   "weaponBonus": [0, 4, 8, 14],
   "armorBonus": [0, 2, 5, 9],
   "mateSkill": { "maxLv": 10, "xpPerLv": 10, "statDiv": 25 }
+ },
+ "monsterScalePerLv": 0.25,
+ "encounter": { "first": 2, "afterBattle": 4, "min": 6, "rand": 8 },
+ "titles": [[50, "Duke"], [40, "Marquis"], [30, "Earl"], [20, "Viscount"], [15, "Baron"], [10, "Knight"], [5, "Squire"], [0, ""]],
+ "skillXp": { "cabinDaily": 1, "battleSwordplay": 5, "battleLeadership": 2 },
+ "heroShop": {
+  "weapons": [
+   { "name": "Cutlass", "cost": 500, "desc": "A fine cutlass for your expeditions ashore." },
+   { "name": "Rapier", "cost": 2000, "desc": "An elegant rapier." },
+   { "name": "Saber", "cost": 8000, "desc": "A masterwork saber." }
+  ],
+  "armors": [
+   { "name": "Leather armor", "cost": 400, "desc": "Sturdy leather armor." },
+   { "name": "Chain mail", "cost": 1500, "desc": "Rings of steel." },
+   { "name": "Plate armor", "cost": 6000, "desc": "A knight's plate." }
+  ],
+  "balm": { "cost": 100, "heal": 30, "desc": "A fragrant healing balm." },
+  "telescope": { "cost": 2000, "desc": "With the telescope you can spot interesting sites from much farther away." }
  }
 }
