@@ -1,0 +1,122 @@
+{
+ "outfit": [
+  {
+   "key": "sails",
+   "tiers": [
+    {
+     "name": "Studding Sails",
+     "cost": 1500,
+     "desc": "+5% speed"
+    },
+    {
+     "name": "Skysails",
+     "cost": 4000,
+     "desc": "+10% total"
+    },
+    {
+     "name": "Moonrakers",
+     "cost": 9000,
+     "desc": "+15% total"
+    }
+   ]
+  },
+  {
+   "key": "cannons",
+   "tiers": [
+    {
+     "name": "Cannon Pedrero",
+     "cost": 2000,
+     "desc": "broadside x1.3"
+    },
+    {
+     "name": "Demicannon",
+     "cost": 5000,
+     "desc": "broadside x1.6"
+    },
+    {
+     "name": "Demiculverin",
+     "cost": 12000,
+     "desc": "broadside x2.0"
+    }
+   ]
+  },
+  {
+   "key": "ram",
+   "name": "Ram",
+   "cost": 2500,
+   "desc": "contact deals 15 hull/s in battle"
+  },
+  {
+   "key": "figurehead",
+   "name": "Figurehead",
+   "cost": 4000,
+   "desc": "fatigue -50%, loot +25%"
+  },
+  {
+   "key": "boarding",
+   "name": "Boarding Planks",
+   "cost": 3500,
+   "desc": "+25% melee power in boarding"
+  },
+  {
+   "key": "armor",
+   "name": "Armor Plating",
+   "cost": 5000,
+   "desc": "damage taken -25%"
+  }
+ ],
+ "cabins": {
+  "captain": {
+   "label": "Captain",
+   "stat": "leadership",
+   "desc": "+1% melee / pt"
+  },
+  "navigation": {
+   "label": "Navigator",
+   "stat": "navigation",
+   "desc": "+5% speed / pt"
+  },
+  "deck": {
+   "label": "Deck",
+   "stat": "seamanship",
+   "desc": "+2% speed / pt"
+  },
+  "gunnery": {
+   "label": "Gunnery",
+   "stat": "gunnery",
+   "desc": "+10% damage / pt"
+  },
+  "accounting": {
+   "label": "Purser",
+   "stat": "accounting",
+   "desc": "+5% sell / pt"
+  },
+  "lookout": {
+   "label": "Lookout",
+   "stat": "intuition",
+   "desc": "+0.5 sight / pt"
+  },
+  "sickbay": {
+   "label": "Sick bay",
+   "stat": "knowledge",
+   "desc": "-5% fatigue / pt"
+  },
+  "kitchen": {
+   "label": "Kitchen",
+   "stat": "seamanship",
+   "desc": "-5% food / pt"
+  },
+  "chapel": {
+   "label": "Chapel",
+   "stat": "luck",
+   "desc": "-3% fatigue / pt"
+  }
+ },
+ "cabinDefaults": [
+  "deck",
+  "navigation",
+  "gunnery",
+  "lookout",
+  "kitchen"
+ ]
+}

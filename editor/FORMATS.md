@@ -89,6 +89,29 @@
 - 结构固定：步骤数量需与内置一致（多余项被忽略，缺失项保留内置文案）。
 - 编辑器内置副本 `editor/data/story.json` 供线上独立部署时回退。
 
+## gvo_map.json — GVO 素材映射
+- `{ goods: { UW2商品名: 图标文件名 }, discoveries: { 村庄id: GVO发现物id } }`
+- 游戏 gvo.js 启动时加载；GVO 素材包选中时，商品图标与发现物大图按此表跨域引用
+  `https://lychees.github.io/dol-rev/`（Pages 带 ACAO:*）。
+- 发现物大图 `assets/discovery/{id:04d}_a.png`（128px）、图标 `_i.png`（48px）。
+- 由 gvo_ref/ 脚本初始生成；**editor/gvoimport.html 可向其中追加新导入的发现物**。
+- 编辑器内置副本 `editor/data/gvo_map.json` 供线上回退。
+
+## equipment.json — 舰船装备与船舱
+- `{ outfit: [...], cabins: {...}, cabinDefaults: [...] }`
+- `outfit`：6 项装备。sails/cannons 为 3 档 `tiers: [{name, cost, desc}]`；
+  ram/figurehead/boarding/armor 为单件 `{key, name, cost, desc}`。key 被游戏代码引用，不可改。
+- `cabins`：9 种船舱 `{ label, stat, desc }`；stat 为伙伴属性名（leadership/navigation 等）。
+- `cabinDefaults`：新船默认船舱布局（cabins 的 key 数组）。
+- 游戏启动时读取覆盖内置表；文件缺失回退内置。副本 `editor/data/equipment.json`。
+
+## balance.json — 全局平衡参数
+- sailDayScale（航行时间加速）、dayLengthSec（每游戏日秒数）、bankInterest（银行日利率）、
+  drainBase/drainPerCrew（补给消耗 = (base + 船员×perCrew)/天）、fatiguePerSettle（疲劳增量）、
+  starvingFatigueMul（断粮疲劳倍率）、deathBase/deathMinPct/deathRandPct（疲劳致死 =
+  base + 船员×(minPct + random×randPct)）、pirateShips（海盗船型池）、pirateRate（海盗刷新秒，0=无）。
+- 游戏启动时读取覆盖内置值；文件缺失回退内置。副本 `editor/data/balance.json`。
+
 ## towns.json — 内陆城镇
 - 数组：`[{ id, name, x, z }]`（z 即世界地图 y 坐标）。
 

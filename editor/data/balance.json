@@ -1,0 +1,19 @@
+{
+ "sailDayScale": 10,
+ "dayLengthSec": 180,
+ "bankInterest": 0.02,
+ "drainBase": 4,
+ "drainPerCrew": 0.25,
+ "fatiguePerSettle": 6,
+ "starvingFatigueMul": 3,
+ "deathBase": 10,
+ "deathMinPct": 0.05,
+ "deathRandPct": 0.2,
+ "pirateShips": [
+  "Brigantine",
+  "Nao",
+  "Galleon",
+  "Carrack"
+ ],
+ "pirateRate": 25
+}

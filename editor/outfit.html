@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>装备 / 船舱 / 平衡参数编辑器 — UW</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/editor.css">
+<style>
+  .tabs { display: flex; gap: 4px; }
+  .tabs button { border-radius: 4px 4px 0 0; }
+  .pane { display: none; flex: 1; }
+  .pane.active { display: flex; }
+  .card {
+    background: #18202e; border: 1px solid #2a3648; border-radius: 8px;
+    padding: 12px 14px; margin-bottom: 12px;
+  }
+  .card h3 { margin: 0 0 10px; font-size: 14px; color: #9fc6ff; }
+  .card h3 .key { color: #6d7f95; font-family: monospace; font-size: 12px; margin-left: 8px; }
+  .tier { border-top: 1px dashed #2a3648; padding-top: 8px; margin-top: 8px; }
+  .tier:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+  .tier h4 { margin: 0 0 6px; font-size: 13px; color: #9db0c7; }
+</style>
+</head>
+<body>
+<div class="ed-toolbar">
+  <div class="tabs">
+    <button id="tab-outfit" class="active">舰船装备</button>
+    <button id="tab-cabins">船舱</button>
+    <button id="tab-balance">平衡参数</button>
+  </div>
+  <span class="spacer"></span>
+  <button id="btn-import">导入 JSON…</button>
+  <button id="btn-export">导出 equipment.json</button>
+</div>
+<div class="ed-main">
+  <section class="pane active" id="pane-outfit">
+    <div style="flex:1;padding:16px;overflow:auto;max-width:860px" id="outfit-main"></div>
+  </section>
+  <section class="pane" id="pane-cabins">
+    <div style="flex:1;padding:16px;overflow:auto;max-width:860px" id="cabins-main"></div>
+  </section>
+  <section class="pane" id="pane-balance">
+    <div style="flex:1;padding:16px;overflow:auto;max-width:760px" id="balance-main"></div>
+  </section>
+</div>
+<script type="module" src="js/outfit.js"></script>
+</body>
+</html>

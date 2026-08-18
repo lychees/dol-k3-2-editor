@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>GVO 发现物导入器 — UW</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/editor.css">
+<style>
+  #gvo-img {
+    width: 128px; height: 128px; object-fit: contain;
+    background: #10141c; border: 1px solid #2a3648; border-radius: 8px;
+  }
+  #world-map { border: 1px solid #35455c; image-rendering: pixelated; cursor: crosshair; display: block; }
+  textarea {
+    background: #1f2a3b; color: #d7dee9;
+    border: 1px solid #35455c; border-radius: 4px;
+    padding: 4px 10px; font: inherit; width: 100%; min-height: 90px;
+    resize: vertical;
+  }
+  .item .done { color: #7bd88a; margin-left: 6px; }
+  .item.imported { opacity: 0.55; }
+  #form input[type="text"] { width: 100%; }
+  #form input[type="number"] { width: 110px; }
+</style>
+</head>
+<body>
+<div class="ed-toolbar">
+  <span class="spacer"></span>
+  <button id="btn-export-villages">导出 villages.json</button>
+  <button id="btn-export-gvomap">导出 gvo_map.json</button>
+</div>
+<div class="ed-main">
+  <div class="ed-side">
+    <input type="text" id="filter" placeholder="搜索名字…" style="width:100%;margin-bottom:8px">
+    <select id="cat" style="width:100%;margin-bottom:8px"></select>
+    <label style="display:block;margin-bottom:8px"><input type="checkbox" id="only-new" checked> 只看未导入</label>
+    <div class="ed-list" id="list"></div>
+  </div>
+  <div style="flex:1;padding:16px;overflow:auto">
+    <div id="empty" class="hint">← 从左侧选择一个 GVO 发现物开始导入（仅列出有大图的条目）</div>
+    <div id="editor" style="display:none">
+      <div style="display:flex;gap:24px;flex-wrap:wrap">
+        <div>
+          <p class="hint" style="margin-top:0">GVO 大图预览（dol-rev 原图，128px）：</p>
+          <img id="gvo-img" alt="">
+        </div>
+        <div class="ed-form" id="form" style="min-width:440px;grid-template-columns:110px 1fr"></div>
+      </div>
+      <p class="hint">世界地图（红点为 villages.json 现有发现物，避免重叠；点击设置新条目坐标，黄圈为当前坐标）：</p>
+      <canvas id="world-map" width="700" height="350"></canvas>
+      <p style="margin-top:12px"><button id="btn-add">添加到游戏</button></p>
+      <p class="hint">img 固定为 [1,1] 占位图集格：经典素材包下显示占位图，GVO 包显示真实大图。</p>
+    </div>
+  </div>
+</div>
+<script type="module" src="js/gvoimport.js"></script>
+</body>
+</html>
