@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>养成编辑器 — UW</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/editor.css">
+<style>
+  .tabs { display: flex; gap: 4px; }
+  .tabs button { border-radius: 4px 4px 0 0; }
+  .pane { display: none; flex: 1; }
+  .pane.active { display: flex; }
+  .hero-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 4px 8px; border-radius: 4px; cursor: pointer;
+  }
+  .hero-item:hover { background: #1f2a3b; }
+  .hero-item.selected { background: #2f5e96; }
+  .hero-item img {
+    width: 28px; height: 28px; object-fit: cover; border-radius: 4px;
+    image-rendering: pixelated; background: #0b0f16; flex: none;
+  }
+  .card {
+    background: #18202e; border: 1px solid #2a3648; border-radius: 8px;
+    padding: 12px 14px; margin-bottom: 12px;
+  }
+  .card h3 { margin: 0 0 10px; font-size: 14px; color: #9fc6ff; }
+  #hero-portrait {
+    width: 128px; height: 128px; object-fit: contain; flex: none;
+    image-rendering: pixelated; background: #10141c;
+    border: 1px solid #2a3648; border-radius: 8px;
+  }
+  table.stats { border-collapse: collapse; }
+  table.stats th, table.stats td { border: 1px solid #2a3648; padding: 3px 12px; text-align: right; }
+  table.stats th { background: #1c2635; }
+  table.stats td:first-child { text-align: left; color: #9db0c7; }
+  #atlas-picker {
+    width: 560px; height: auto; image-rendering: pixelated;
+    cursor: crosshair; border: 1px solid #2a3648; border-radius: 4px;
+  }
+  #mon-preview {
+    width: 98px; height: 98px; image-rendering: pixelated;
+    border: 1px solid #2a3648; border-radius: 4px; background: #0b0f16;
+  }
+</style>
+</head>
+<body>
+<div class="ed-toolbar">
+  <div class="tabs">
+    <button id="tab-heroes" class="active">主角属性</button>
+    <button id="tab-growth">成长参数</button>
+    <button id="tab-monsters">怪物</button>
+  </div>
+  <span class="spacer"></span>
+  <button id="btn-import">导入 JSON…</button>
+  <button id="btn-export">导出 heroes.json</button>
+</div>
+<div class="ed-main">
+  <section class="pane active" id="pane-heroes">
+    <div class="ed-side" style="width:220px">
+      <div class="ed-list" id="hero-list"></div>
+    </div>
+    <div style="flex:1;padding:16px;overflow:auto" id="hero-main"></div>
+  </section>
+  <section class="pane" id="pane-growth">
+    <div style="flex:1;padding:16px;overflow:auto;max-width:760px" id="growth-main"></div>
+  </section>
+  <section class="pane" id="pane-monsters">
+    <div class="ed-side" style="width:220px">
+      <div style="display:flex;gap:6px;margin-bottom:8px">
+        <button id="btn-add">新增怪物</button>
+        <button id="btn-del" class="danger">删除怪物</button>
+      </div>
+      <p class="hint">数组下标即难度 tier：野外离船越远，遇到的怪物下标越大。</p>
+      <div class="ed-list" id="mon-list"></div>
+    </div>
+    <div style="flex:1;padding:16px;overflow:auto" id="mon-main"></div>
+  </section>
+</div>
+<script type="module" src="js/hero.js"></script>
+</body>
+</html>

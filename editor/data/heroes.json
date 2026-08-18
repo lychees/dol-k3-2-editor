@@ -1,0 +1,21 @@
+{
+ "attrs": [
+  { "str": 12, "agi": 12, "con": 12, "int": 12, "per": 12, "cha": 14 },
+  { "str": 14, "agi": 14, "con": 12, "int": 10, "per": 12, "cha": 12 },
+  { "str": 15, "agi": 11, "con": 14, "int": 10, "per": 10, "cha": 13 },
+  { "str": 9, "agi": 11, "con": 10, "int": 16, "per": 14, "cha": 10 },
+  { "str": 12, "agi": 13, "con": 12, "int": 11, "per": 14, "cha": 11 },
+  { "str": 10, "agi": 12, "con": 11, "int": 13, "per": 12, "cha": 15 },
+  { "str": 8, "agi": 11, "con": 10, "int": 16, "per": 13, "cha": 12 }
+ ],
+ "growth": {
+  "maxHp": { "base": 20, "perLv": 8, "conMul": 2 },
+  "maxSp": { "base": 10, "perLv": 2, "intMul": 1, "perMul": 1 },
+  "atk": { "base": 4, "perLv": 2, "strDiv": 5, "fatigueFactor": 0.75 },
+  "defLvDiv": 2,
+  "expPerLv": 20,
+  "weaponBonus": [0, 4, 8, 14],
+  "armorBonus": [0, 2, 5, 9],
+  "mateSkill": { "maxLv": 10, "xpPerLv": 10, "statDiv": 25 }
+ }
+}

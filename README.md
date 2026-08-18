@@ -29,6 +29,11 @@ merge them back into the game repo's `game/assets/` to apply.
 - **Story editor** (`editor/story.html`) — the 7 protagonists' main
   storylines (`story.json`: chapter name/goal/reward/text), with an
   in-game-style dialog preview
+- **Hero/monster editor** (`editor/hero.html`) — the CRPG layer: hero
+  six-attribute stats, growth formulas (HP/SP/atk/def, exp curve,
+  weapon/armor tiers, mate-skill leveling) in `heroes.json`, and the
+  land-expedition monsters in `monsters.json` (with art picker), plus a
+  live stat preview
 - **Economy editor** (`editor/goods.html`) — 13 regions × 46 goods price
   matrix and per-port specialties in `goods.json`
 - **Port editor** (`editor/ports.html`) — drag ports on the world map; edit

@@ -64,6 +64,23 @@
 - x/y 为世界地图 tile 坐标；`img` 为 discoveries.png 中 1-based [列, 行]（49px 格，16 列 × 8 行，无前边距）。
 - `subject` 为学科分类（biology / archaeology 等）。
 
+## heroes.json — 主角与成长公式（养成）
+- `{ attrs: [...7 位主角的六维], growth: {...} }`。
+- `attrs[i]` = `{ str, agi, con, int, per, cha }`（3–18），索引同主角（0 João … 6 Isabella）。
+- `growth` 公式系数（main.js 的 GROWTH，缺失时内置默认值）：
+  - `maxHp = base + perLv×lv + con×conMul`；`maxSp = base + perLv×lv + int×intMul + per×perMul`
+  - `atk = (base + perLv×lv + weaponBonus[武器tier] + floor(str/strDiv)) × (疲劳≥90 时 ×fatigueFactor)`
+  - `def = floor(lv/defLvDiv) + armorBonus[护甲tier]`；升级 exp = `lv × expPerLv`
+  - `weaponBonus` / `armorBonus`：tier 0–3 四档
+  - `mateSkill`：伙伴技能 `lv = clamp(1..maxLv, floor(属性/statDiv) + 技能加成)`，升级 xp = `lv × xpPerLv`
+- 编辑器内置副本 `editor/data/heroes.json` 供线上回退。
+
+## monsters.json — 陆地怪物（陆上探险战斗）
+- 数组：`[{ name, img: [col,row], hp, atk, def, exp, gold }]`（8 只）。
+- `img` 为 discoveries.png 的 1-based [列, 行]（49px 格）。
+- 数组下标即难度 tier：野外离船越远遇到的 tier 越高；新增怪物会扩展难度梯度。
+- 编辑器内置副本 `editor/data/monsters.json` 供线上回退。
+
 ## story.json — 主线剧情
 - 数组，7 条剧情线（按主角索引 0–6：João / Catalina / Otto / Ernst / Pietro / Ali / Isabella）：
   `[{ title, steps: [{ name, goal, reward, text }] }]`
