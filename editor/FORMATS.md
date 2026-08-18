@@ -42,6 +42,15 @@
 ## maids.json — 酒吧女郎
 - `{ "<id>": { name, image: [x, y] } }`，image 同上。
 
+## mates_extra.json — 原创角色
+- `{ "<id>": { ...同 mates, portrait: "./assets/waifu/x.png" } }`，id > 50（当前 51–54：
+  Eudora / Mita / Sophia / Barbara，Isabella 的初始同伴，游戏开始自动入队）。
+- `portrait` 为自定义头像图片路径，优先于 figures.png 的 image 格；删除该字段即回退图集头像。
+- 技能（accounting/gunnery/navigation）为 0–100 量表（initMateSkills 中 ≥25 折算满级 10），
+  与 mates.json 的 0–3 不同。
+- 游戏启动时按 id 覆盖 main.js 内置的同名角色；文件缺失时保留内置数据。
+- 编辑器内置副本 `editor/data/mates_extra.json` 供线上独立部署时回退。
+
 ## goods.json — 商品经济
 - `{ regions: { "<区域>": { available: {商品: [buy,sell]}, prices: {商品: [buy,sell]} } }, specialties: { "<港口id>": { name, price } } }`
 - 13 个区域：Iberia, Northern Europe, The Mediterranean, North Africa, Ottoman Empire,

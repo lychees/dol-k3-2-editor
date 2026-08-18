@@ -23,8 +23,9 @@ merge them back into the game repo's `game/assets/` to apply.
   overlay
 - **Ship editor** (`editor/ships.html`) — all 22 ship types in `ships.json`,
   with ship image preview
-- **Character editor** (`editor/mates.html`) — 50 mates + 28 barmaids, with a
-  portrait picker over `figures.png`
+- **Character editor** (`editor/mates.html`) — 50 mates + 28 barmaids + the 4
+  original characters (Isabella's companions, `mates_extra.json`), with a
+  portrait picker over `figures.png` and the waifu portraits
 - **Story editor** (`editor/story.html`) — the 7 protagonists' main
   storylines (`story.json`: chapter name/goal/reward/text), with an
   in-game-style dialog preview

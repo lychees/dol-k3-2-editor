@@ -1,0 +1,82 @@
+{
+ "51": {
+  "name": "Eudora",
+  "nation": "Portugal",
+  "lv": 3,
+  "leadership": 40,
+  "seamanship": 45,
+  "knowledge": 75,
+  "intuition": 70,
+  "courage": 40,
+  "swordplay": 30,
+  "luck": 65,
+  "accounting": 20,
+  "gunnery": 10,
+  "navigation": 30,
+  "image": [
+   1,
+   1
+  ],
+  "portrait": "./assets/waifu/eudora.png"
+ },
+ "52": {
+  "name": "Mita",
+  "nation": "Portugal",
+  "lv": 2,
+  "leadership": 45,
+  "seamanship": 65,
+  "knowledge": 50,
+  "intuition": 55,
+  "courage": 50,
+  "swordplay": 45,
+  "luck": 55,
+  "accounting": 30,
+  "gunnery": 20,
+  "navigation": 65,
+  "image": [
+   1,
+   1
+  ],
+  "portrait": "./assets/waifu/mita.png"
+ },
+ "53": {
+  "name": "Sophia",
+  "nation": "Portugal",
+  "lv": 2,
+  "leadership": 40,
+  "seamanship": 50,
+  "knowledge": 65,
+  "intuition": 60,
+  "courage": 40,
+  "swordplay": 35,
+  "luck": 60,
+  "accounting": 60,
+  "gunnery": 15,
+  "navigation": 40,
+  "image": [
+   1,
+   1
+  ],
+  "portrait": "./assets/waifu/sophia.png"
+ },
+ "54": {
+  "name": "Barbara",
+  "nation": "Portugal",
+  "lv": 2,
+  "leadership": 50,
+  "seamanship": 55,
+  "knowledge": 45,
+  "intuition": 50,
+  "courage": 65,
+  "swordplay": 60,
+  "luck": 50,
+  "accounting": 25,
+  "gunnery": 40,
+  "navigation": 45,
+  "image": [
+   1,
+   1
+  ],
+  "portrait": "./assets/waifu/barbara.png"
+ }
+}

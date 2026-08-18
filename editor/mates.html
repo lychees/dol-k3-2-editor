@@ -17,6 +17,7 @@
   <div class="tabs">
     <button id="tab-mates" class="active">伙伴 (mates.json)</button>
     <button id="tab-maids">酒吧女郎 (maids.json)</button>
+    <button id="tab-extra">原创角色 (mates_extra.json)</button>
   </div>
   <span class="spacer"></span>
   <button id="btn-import">导入 JSON…</button>
@@ -38,6 +39,13 @@
         <div>
           <p class="hint">当前头像（image: [<span id="img-coord"></span>]）：</p>
           <canvas id="portrait-view" width="59" height="75" style="width:130px;height:165px"></canvas>
+          <div id="custom-portrait" style="display:none">
+            <p class="hint">自定义头像（portrait 字段，优先于图集）：</p>
+            <img id="portrait-custom-img" alt="" style="width:130px;image-rendering:pixelated;border:1px solid #35455c;background:#0b0f16">
+            <p class="hint">点击下方 waifu 图片更换自定义头像：</p>
+            <div id="waifu-picker" style="display:flex;gap:6px;flex-wrap:wrap;max-width:300px"></div>
+            <p><button id="btn-clear-portrait" class="danger">清除自定义头像（改回图集头像）</button></p>
+          </div>
           <p class="hint">点击下方图集更换头像：</p>
           <canvas id="portrait-picker"></canvas>
         </div>
