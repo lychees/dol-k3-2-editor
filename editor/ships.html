@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>船舰编辑器 — UW</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/editor.css">
+</head>
+<body>
+<div class="ed-toolbar">
+  <button id="btn-add">新增船型</button>
+  <button id="btn-del" class="danger">删除选中</button>
+  <span class="spacer"></span>
+  <button id="btn-import">导入 JSON…</button>
+  <button id="btn-export">导出 ships.json</button>
+</div>
+<div class="ed-main">
+  <div class="ed-side">
+    <input type="text" id="filter" placeholder="筛选船名…" style="width:100%;margin-bottom:8px">
+    <div class="ed-list" id="list"></div>
+  </div>
+  <div style="flex:1;padding:16px;overflow:auto">
+    <div id="empty" class="hint">← 选择左侧船型进行编辑</div>
+    <div id="editor" style="display:none;max-width:560px">
+      <div class="ed-form" id="form"></div>
+      <p class="hint" id="ship-tip"></p>
+    </div>
+  </div>
+</div>
+<script type="module" src="js/ships.js"></script>
+</body>
+</html>

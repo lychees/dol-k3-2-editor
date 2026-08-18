@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>人物编辑器 — UW</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/editor.css">
+<style>
+  #portrait-picker { border: 1px solid #35455c; image-rendering: pixelated; cursor: pointer; }
+  #portrait-view { border: 1px solid #35455c; image-rendering: pixelated; background: #0b0f16; }
+  .tabs { display: flex; gap: 4px; }
+  .tabs button { border-radius: 4px 4px 0 0; }
+</style>
+</head>
+<body>
+<div class="ed-toolbar">
+  <div class="tabs">
+    <button id="tab-mates" class="active">伙伴 (mates.json)</button>
+    <button id="tab-maids">酒吧女郎 (maids.json)</button>
+  </div>
+  <span class="spacer"></span>
+  <button id="btn-import">导入 JSON…</button>
+  <button id="btn-export">导出 JSON</button>
+</div>
+<div class="ed-main">
+  <div class="ed-side">
+    <input type="text" id="filter" placeholder="筛选名字…" style="width:100%;margin-bottom:8px">
+    <div class="ed-list" id="list"></div>
+  </div>
+  <div style="flex:1;padding:16px;overflow:auto">
+    <div id="empty" class="hint">← 选择左侧人物进行编辑</div>
+    <div id="editor" style="display:none">
+      <div style="display:flex;gap:24px;flex-wrap:wrap">
+        <div>
+          <div class="ed-form" id="form" style="min-width:380px"></div>
+          <p class="hint" id="tip"></p>
+        </div>
+        <div>
+          <p class="hint">当前头像（image: [<span id="img-coord"></span>]）：</p>
+          <canvas id="portrait-view" width="59" height="75" style="width:130px;height:165px"></canvas>
+          <p class="hint">点击下方图集更换头像：</p>
+          <canvas id="portrait-picker"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="module" src="js/mates.js"></script>
+</body>
+</html>

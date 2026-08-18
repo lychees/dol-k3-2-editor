@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>世界地图编辑器 — UW</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/editor.css">
+</head>
+<body>
+<div class="ed-toolbar">
+  <button data-tool="brush" class="active">画笔</button>
+  <button data-tool="rect">矩形填充</button>
+  <button data-tool="fill">油漆桶</button>
+  <button data-tool="picker">取色器</button>
+  <button data-tool="pan">平移</button>
+  <label>笔刷
+    <select id="brush-size">
+      <option value="1">1</option>
+      <option value="3" selected>3</option>
+      <option value="5">5</option>
+      <option value="9">9</option>
+    </select>
+  </label>
+  <button id="zoom-out">−</button>
+  <span id="zoom-label" style="min-width:72px;text-align:center">1 px/tile</span>
+  <button id="zoom-in">＋</button>
+  <button id="btn-undo" disabled>撤销</button>
+  <button id="btn-redo" disabled>重做</button>
+  <label><input type="checkbox" id="ov-grid"> 网格(≥8)</label>
+  <label><input type="checkbox" id="ov-ports" checked> 港口</label>
+  <label><input type="checkbox" id="ov-towns" checked> 城镇</label>
+  <label><input type="checkbox" id="ov-ruins" checked> 遗迹</label>
+  <label><input type="checkbox" id="ov-villages" checked> 发现物</label>
+  <span class="spacer"></span>
+  <button id="btn-import">导入 BIN…</button>
+  <button id="btn-export">导出 world_map.bin</button>
+</div>
+<div class="ed-main">
+  <div class="ed-side">
+    <div style="margin-bottom:8px">
+      当前 tile：<b id="cur-tile">1</b>
+      <span class="hint">（id 1–32 为可航行水域）</span>
+    </div>
+    <canvas id="palette" width="512" height="256"
+      style="width:100%;image-rendering:pixelated;cursor:pointer;border:1px solid #2a3648"></canvas>
+    <p class="hint">
+      左键使用当前工具；Alt+左键 快速取色；中键/右键拖动平移；滚轮以鼠标为中心缩放。<br>
+      Ctrl+Z 撤销，Ctrl+Y 重做。世界为环面，画笔与填充在边缘自动环绕。
+    </p>
+  </div>
+  <div class="ed-canvas-wrap" id="wrap">
+    <canvas class="ed-canvas" id="view"></canvas>
+    <div id="status" style="position:absolute;left:0;right:0;bottom:0;padding:4px 10px;
+      background:#141b27;border-top:1px solid #263143;font-size:12px;color:#9db0c7">加载中…</div>
+  </div>
+</div>
+<script type="module" src="js/map.js"></script>
+</body>
+</html>

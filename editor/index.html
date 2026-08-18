@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>UW 编辑器套件</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/editor.css">
+</head>
+<body>
+<div class="hub">
+  <h1>Uncharted Waters — 编辑器套件</h1>
+  <p class="hint">
+    在线版：<a href="https://lychees.github.io/dol-k3-2-editor/editor/">lychees.github.io/dol-k3-2-editor</a>
+    直接读取游戏站点的公开数据，导出后的文件需手动合并回游戏仓库。
+    本地版：在游戏仓库的 <code>game/</code> 目录运行 <code>python -m http.server 8734</code>，打开
+    <code>http://127.0.0.1:8734/editor/</code>，此时直接读写本地 <code>game/assets/</code>。
+    修改后点击「导出」下载文件，用它覆盖 <code>game/assets/</code> 中的同名文件即可生效。
+    修改不会影响已存在的游戏存档（localStorage），新游戏或重置后生效。
+  </p>
+  <div class="hub-grid">
+    <a class="hub-card" href="map.html">
+      <h2>🗺️ 世界地图编辑器</h2>
+      <p>编辑 2160×1080 世界地图：画笔 / 矩形 / 填充 / 取色、昼夜图块预览、港口与发现物位置叠加、撤销重做。</p>
+      <div class="files">world_map.bin · tiles_day.png · ports.json</div>
+    </a>
+    <a class="hub-card" href="portmap.html">
+      <h2>🏘️ 港口地图编辑器</h2>
+      <p>编辑 101 张 96×96 港口场景地图，按港口自动加载对应的 PORTCHIP 图块集，支持建筑位置叠加显示。</p>
+      <div class="files">portmaps.bin · portchips/*.png · port_meta.json</div>
+    </a>
+    <a class="hub-card" href="ships.html">
+      <h2>⛵ 船舰编辑器</h2>
+      <p>编辑 22 种船型的耐久、动力、载货、火炮、船员、价格、转向等属性，可新增 / 删除 / 重命名船型。</p>
+      <div class="files">ships.json</div>
+    </a>
+    <a class="hub-card" href="mates.html">
+      <h2>🧑‍🤝‍🧑 人物编辑器</h2>
+      <p>编辑 50 位可招募伙伴与 28 位酒吧女郎：属性、技能、等级、国籍，点击头像图集直接换头像。</p>
+      <div class="files">mates.json · maids.json · figures.png</div>
+    </a>
+    <a class="hub-card" href="goods.html">
+      <h2>💰 商品经济编辑器</h2>
+      <p>编辑 13 个区域 × 46 种商品的买卖价格矩阵、各区域可购商品，以及 67 个港口的特产。</p>
+      <div class="files">goods.json</div>
+    </a>
+    <a class="hub-card" href="ports.html">
+      <h2>⚓ 港口编辑器</h2>
+      <p>在世界地图上拖动港口标记改变位置；编辑港口名称、区域、图块集、酒吧女郎与 12 种建筑的位置。</p>
+      <div class="files">ports.json · port_meta.json</div>
+    </a>
+    <a class="hub-card" href="world.html">
+      <h2>🗿 发现物 / 城镇 / 遗迹编辑器</h2>
+      <p>编辑 98 个发现物（含美术图预览）、14 个内陆城镇、10 个遗迹的名称、描述与地图坐标。</p>
+      <div class="files">villages.json · towns.json · ruins.json · discoveries.png</div>
+    </a>
+    <a class="hub-card" href="assets.html">
+      <h2>🖼️ 资产浏览器</h2>
+      <p>浏览全部图块集、精灵图、头像、NPC 图集、建筑与船只图片；试听音乐与音效。</p>
+      <div class="files">assets/ 全部媒体文件</div>
+    </a>
+  </div>
+  <p class="hint" style="margin-top:18px">
+    提示：所有编辑器互不依赖，修改前建议先备份 <code>game/assets/</code> 目录（或用 git 跟踪改动）。
+  </p>
+</div>
+</body>
+</html>

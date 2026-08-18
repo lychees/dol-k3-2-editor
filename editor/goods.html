@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>商品经济编辑器 — UW</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/editor.css">
+<style>
+  .tabs { display: flex; gap: 4px; }
+  td.avail-off { color: #5a6b80; }
+  td input[type="number"] { width: 70px; }
+</style>
+</head>
+<body>
+<div class="ed-toolbar">
+  <div class="tabs">
+    <button id="tab-regions" class="active">区域价格</button>
+    <button id="tab-specialties">港口特产</button>
+  </div>
+  <span class="spacer"></span>
+  <button id="btn-import">导入 JSON…</button>
+  <button id="btn-export">导出 goods.json</button>
+</div>
+<div style="padding:16px;overflow:auto">
+  <div id="pane-regions">
+    <p>
+      <label>区域：<select id="region-select"></select></label>
+      <span class="hint">「可购」勾选后该商品出现在此区域市场的买入列表中；买价为 0 表示此区域不生产该商品。</span>
+    </p>
+    <table class="ed-table" id="goods-table">
+      <thead><tr><th>可购</th><th>商品</th><th>买价 buy</th><th>卖价 sell</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div id="pane-specialties" style="display:none">
+    <p>
+      <button id="btn-add-spec">新增特产</button>
+      <span class="hint">特产按港口 id 引用（见 ports.json），会以固定价格出现在该港口市场。</span>
+    </p>
+    <table class="ed-table" id="spec-table">
+      <thead><tr><th>港口 id</th><th>港口名</th><th>特产商品</th><th>价格</th><th></th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+<script type="module" src="js/goods.js"></script>
+</body>
+</html>

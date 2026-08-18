@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>发现物 / 城镇 / 遗迹编辑器 — UW</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/editor.css">
+<style>
+  #atlas-picker { border: 1px solid #35455c; image-rendering: pixelated; cursor: pointer; max-width: 100%; }
+  #img-preview { border: 1px solid #35455c; image-rendering: pixelated; background: #0b0f16; }
+  #world-map { border: 1px solid #35455c; image-rendering: pixelated; cursor: crosshair; display: block; }
+  .tabs { display: flex; gap: 4px; }
+  .tabs button { border-radius: 4px 4px 0 0; }
+  textarea {
+    background: #1f2a3b; color: #d7dee9;
+    border: 1px solid #35455c; border-radius: 4px;
+    padding: 4px 10px; font: inherit; width: 100%; min-height: 90px;
+    resize: vertical;
+  }
+</style>
+</head>
+<body>
+<div class="ed-toolbar">
+  <div class="tabs">
+    <button id="tab-villages" class="active">发现物 (villages.json)</button>
+    <button id="tab-towns">城镇 (towns.json)</button>
+    <button id="tab-ruins">遗迹 (ruins.json)</button>
+  </div>
+  <span class="spacer"></span>
+  <button id="btn-import">导入 JSON…</button>
+  <button id="btn-export">导出 JSON</button>
+</div>
+<div class="ed-main">
+  <div class="ed-side">
+    <input type="text" id="filter" placeholder="筛选 id / 名字…" style="width:100%;margin-bottom:8px">
+    <div class="ed-list" id="list"></div>
+    <div style="margin-top:8px;display:flex;gap:8px">
+      <button id="btn-add">新增</button>
+      <button id="btn-del" class="danger">删除</button>
+    </div>
+  </div>
+  <div style="flex:1;padding:16px;overflow:auto">
+    <div id="empty" class="hint">← 选择左侧条目进行编辑；点击下方世界地图可设置坐标</div>
+    <div id="editor" style="display:none">
+      <div style="display:flex;gap:24px;flex-wrap:wrap">
+        <div>
+          <div class="ed-form" id="form" style="min-width:420px"></div>
+          <p class="hint" id="tip"></p>
+        </div>
+        <div id="img-panel">
+          <p class="hint">当前美术（img: [<span id="img-coord"></span>]，98×98 预览）：</p>
+          <canvas id="img-preview" width="98" height="98"></canvas>
+          <p class="hint">点击下方图集更换美术（discoveries.png，49px 格，2 倍放大）：</p>
+          <canvas id="atlas-picker"></canvas>
+        </div>
+      </div>
+    </div>
+    <p class="hint">世界地图（红点是当前 tab 全部条目，黄圈为选中项；点击设置选中条目的坐标）：</p>
+    <canvas id="world-map" width="700" height="350"></canvas>
+  </div>
+</div>
+<script type="module" src="js/world.js"></script>
+</body>
+</html>

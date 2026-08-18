@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>港口地图编辑器 — UW</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/editor.css">
+</head>
+<body>
+<div class="ed-toolbar">
+  <label>地图 <select id="map-select"></select></label>
+  <label>缩放 <select id="zoom-select">
+    <option value="4">4 px</option>
+    <option value="6" selected>6 px</option>
+    <option value="8">8 px</option>
+    <option value="12">12 px</option>
+    <option value="16">16 px</option>
+  </select></label>
+  <span style="width:1px;height:20px;background:#2a3648"></span>
+  <button class="tool active" data-tool="brush">画笔</button>
+  <button class="tool" data-tool="rect">矩形填充</button>
+  <button class="tool" data-tool="fill">油漆桶</button>
+  <button class="tool" data-tool="picker">取色器</button>
+  <label id="brush-label">笔刷 <select id="brush-size">
+    <option value="1" selected>1</option>
+    <option value="3">3</option>
+    <option value="5">5</option>
+  </select></label>
+  <span style="width:1px;height:20px;background:#2a3648"></span>
+  <label><input type="checkbox" id="chk-grid" checked> 网格</label>
+  <label><input type="checkbox" id="chk-buildings" checked> 建筑</label>
+  <button id="btn-undo">撤销</button>
+  <button id="btn-redo">重做</button>
+  <span class="spacer"></span>
+  <button id="btn-import-map">导入到当前地图…</button>
+  <button id="btn-export-map">导出当前地图</button>
+  <button id="btn-import-all">导入 portmaps.bin…</button>
+  <button id="btn-export-all">导出 portmaps.bin</button>
+</div>
+<div class="ed-main">
+  <div class="ed-side">
+    <div class="hint" id="map-info" style="margin-bottom:8px"></div>
+    <canvas id="palette" width="512" height="480"
+      style="width:100%;image-rendering:pixelated;cursor:pointer;border:1px solid #263143"></canvas>
+    <div class="hint" id="cur-tile" style="margin-top:8px"></div>
+    <p class="hint">左键使用当前工具；Alt+左键快捷取色；Ctrl+Z 撤销，Ctrl+Y 重做。面板数字为显示 id（1–240），存储时减 1。</p>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;min-width:0">
+    <div id="canvas-wrap" style="flex:1;overflow:auto;display:flex;background:#0b0f16">
+      <div style="margin:auto;padding:16px">
+        <canvas id="map-canvas" style="image-rendering:pixelated;cursor:crosshair;display:block"></canvas>
+      </div>
+    </div>
+    <div id="status" class="hint" style="padding:4px 12px;background:#141b27;border-top:1px solid #263143">就绪</div>
+  </div>
+</div>
+<script type="module" src="js/portmap.js"></script>
+</body>
+</html>

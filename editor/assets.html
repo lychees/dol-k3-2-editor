@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>资产浏览器 — UW</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/editor.css">
+<style>
+  .tree-group { margin-bottom: 2px; }
+  .tree-head {
+    padding: 4px 8px; border-radius: 4px; cursor: pointer; user-select: none;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    color: #9db0c7; font-weight: 600;
+  }
+  .tree-head:hover { background: #1f2a3b; }
+  .tree-head .count { color: #6d7f95; font-weight: 400; font-size: 12px; }
+  .tree-items { margin-left: 10px; display: flex; flex-direction: column; gap: 2px; }
+  .tree-group.collapsed .tree-items { display: none; }
+  .tree-items .item {
+    padding: 3px 8px; border-radius: 4px; cursor: pointer;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .tree-items .item:hover { background: #1f2a3b; }
+  .tree-items .item.selected { background: #2f5e96; }
+
+  .viewer-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .viewer-bar strong { color: #9fc6ff; font-family: monospace; }
+  .btn-link {
+    background: #1f2a3b; color: #d7dee9; border: 1px solid #35455c;
+    border-radius: 4px; padding: 4px 10px; text-decoration: none; font: inherit;
+  }
+  .btn-link:hover { background: #2a3a52; }
+
+  .img-checker {
+    overflow: auto; max-width: 100%; max-height: calc(100vh - 240px);
+    padding: 8px; border: 1px solid #2a3648; border-radius: 4px;
+    background-color: #20242c;
+    background-image:
+      linear-gradient(45deg, #2c313b 25%, transparent 25%, transparent 75%, #2c313b 75%),
+      linear-gradient(45deg, #2c313b 25%, transparent 25%, transparent 75%, #2c313b 75%);
+    background-size: 16px 16px;
+    background-position: 0 0, 8px 8px;
+  }
+  .img-wrap { position: relative; display: inline-block; line-height: 0; }
+  .img-wrap img { display: block; width: 100%; image-rendering: pixelated; }
+  .img-wrap canvas {
+    position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
+  }
+
+  pre.json-view {
+    background: #0b0f16; border: 1px solid #2a3648; border-radius: 4px;
+    padding: 12px; overflow: auto; max-height: calc(100vh - 240px);
+    font: 12px/1.5 Consolas, monospace; margin: 0;
+  }
+  audio { width: 420px; max-width: 100%; display: block; }
+</style>
+</head>
+<body>
+<div class="ed-main">
+  <div class="ed-side">
+    <input type="text" id="filter" placeholder="筛选文件名…" style="width:100%;margin-bottom:8px">
+    <div id="tree"></div>
+  </div>
+  <div style="flex:1;padding:16px;overflow:auto">
+    <div id="empty" class="hint">← 选择左侧文件进行预览</div>
+    <div id="viewer" style="display:none"></div>
+  </div>
+</div>
+<script type="module" src="js/assets.js"></script>
+</body>
+</html>

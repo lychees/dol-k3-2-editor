@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>港口编辑器 — UW</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/editor.css">
+<style>
+  #left {
+    width: 784px; flex: none; display: flex; flex-direction: column;
+    background: #141b27; border-right: 1px solid #263143;
+  }
+  #map-wrap { padding: 12px 12px 8px; }
+  #map {
+    display: block; width: 760px; height: 380px;
+    image-rendering: pixelated; cursor: crosshair;
+    background: #0b0f16; border: 1px solid #2a3648;
+  }
+  #list-wrap { flex: 1; overflow-y: auto; padding: 0 12px 12px; min-height: 120px; }
+  #right { flex: 1; padding: 16px; overflow: auto; }
+  #editor { max-width: 720px; }
+  #editor h3 { margin: 18px 0 8px; font-size: 14px; color: #9fc6ff; }
+  #portmap {
+    display: block; margin-top: 8px;
+    image-rendering: pixelated; cursor: crosshair;
+    border: 1px solid #2a3648; background: #0b0f16;
+  }
+  #bld-table input[type="number"] { width: 64px; }
+  #bld-add-row { display: flex; gap: 8px; margin-top: 8px; align-items: center; }
+</style>
+</head>
+<body>
+<div class="ed-toolbar">
+  <button id="btn-add">新增港口</button>
+  <button id="btn-del" class="danger">删除选中</button>
+  <span class="spacer"></span>
+  <button id="btn-import-ports">导入 ports.json…</button>
+  <button id="btn-export-ports">导出 ports.json</button>
+  <button id="btn-import-meta">导入 port_meta.json…</button>
+  <button id="btn-export-meta">导出 port_meta.json</button>
+</div>
+<div class="ed-main">
+  <div id="left">
+    <div id="map-wrap">
+      <canvas id="map" width="760" height="380"></canvas>
+      <p class="hint" style="margin:6px 0 0">拖动标记移动港口；点击标记选中。</p>
+    </div>
+    <div id="list-wrap">
+      <input type="text" id="filter" placeholder="筛选 id 或港口名…" style="width:100%;margin-bottom:8px">
+      <div class="ed-list" id="list"></div>
+    </div>
+  </div>
+  <div id="right">
+    <div id="empty" class="hint">← 选择左侧港口进行编辑</div>
+    <div id="editor" style="display:none">
+      <div class="ed-form" id="form"></div>
+      <p class="hint" id="meta-tip"></p>
+      <div id="meta-body" style="display:none">
+        <h3>建筑</h3>
+        <table class="ed-table" id="bld-table">
+          <thead><tr><th>id</th><th>名称</th><th>x</th><th>y</th><th></th></tr></thead>
+          <tbody id="bld-body"></tbody>
+        </table>
+        <div id="bld-add-row">
+          <select id="bld-add-sel"></select>
+          <button id="bld-add-btn">添加建筑</button>
+        </div>
+        <h3>港口地图（点选移动建筑）</h3>
+        <canvas id="portmap" width="384" height="384"></canvas>
+        <p class="hint">先在建筑表格中选中一行，再点击地图，把该建筑移到点击的 tile 坐标。</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="module" src="js/ports.js"></script>
+</body>
+</html>
